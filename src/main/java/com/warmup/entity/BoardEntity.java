@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "board_table")
+@Table(name = "board")
 public class BoardEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,29 +21,39 @@ public class BoardEntity extends BaseEntity {
     )
     private List<PostEntity> postEntityList = new ArrayList<>();
 
-    public BoardEntity(){
+    public BoardEntity() {
     }
 
-    public BoardEntity(Long id, String name, List<PostEntity> postEntityList){
+    public BoardEntity(Long id, String name, List<PostEntity> postEntityList) {
         this.id = id;
         this.name = name;
         this.postEntityList = postEntityList;
     }
 
-    public BoardEntity(Long id, String name){
+    public BoardEntity(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public List<PostEntity> getPostEntityList() { return postEntityList; }
+    public List<PostEntity> getPostEntityList() {
+        return postEntityList;
+    }
 
     public void setPostEntityList(List<PostEntity> postEntityList) {
         this.postEntityList = postEntityList;

@@ -22,8 +22,12 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    show-sql: true
+      ddl-auto: update
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp

@@ -29,7 +29,8 @@ public class PostController {
     }
 
     @GetMapping("{id}")
-    public PostDto readPost(@PathVariable("id") int id) {
+    public PostDto readPost(
+            @RequestParam(value = "id") int id) {
         return this.postService.readPost(id);
     }
 
