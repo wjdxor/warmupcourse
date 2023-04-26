@@ -4,7 +4,7 @@ package com.warmup.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "post")
+@Table(name = "post_table")
 public class PostEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
