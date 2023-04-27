@@ -27,14 +27,7 @@ public class PostService {
 
     public PostDto readPost(int id){
         PostEntity postEntity = this.postDao.readPost(id);
-        PostDto postDto = new PostDto(
-                Math.toIntExact(postEntity.getId()),
-                postEntity.getTitle(),
-                postEntity.getContent(),
-                postEntity.getWriter(),
-                postEntity.getBoardEntity() == null
-                        ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
-        );
+        PostDto postDto = createPostDto(postEntity);
         return postDto;
     }
 
@@ -43,14 +36,7 @@ public class PostService {
         List<PostDto> postDtoList = new ArrayList<>();
         while (iterator.hasNext()){
             PostEntity postEntity = iterator.next();
-            postDtoList.add(new PostDto(
-                    Math.toIntExact(postEntity.getId()),
-                    postEntity.getTitle(),
-                    postEntity.getContent(),
-                    postEntity.getWriter(),
-                    postEntity.getBoardEntity() == null
-                            ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
-            ));
+            postDtoList.add(createPostDto(postEntity));
         }
         return postDtoList;
     }
@@ -60,17 +46,23 @@ public class PostService {
         List<PostDto> postDtoList = new ArrayList<>();
         while (iterator.hasNext()){
             PostEntity postEntity = (PostEntity) iterator.next();
-            postDtoList.add(new PostDto(
-                    Math.toIntExact(postEntity.getId()),
-                    postEntity.getTitle(),
-                    postEntity.getContent(),
-                    postEntity.getWriter(),
-                    postEntity.getBoardEntity() == null
-                            ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
-            ));
+            postDtoList.add(createPostDto(postEntity));
         }
         return postDtoList;
     }
+
+
+    private PostDto createPostDto(PostEntity postEntity) {
+        return new PostDto(
+                Math.toIntExact(postEntity.getId()),
+                postEntity.getTitle(),
+                postEntity.getContent(),
+                postEntity.getWriter(),
+                postEntity.getBoardEntity() == null
+                        ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
+        );
+    }
+
 
     public void updatePost(int id, PostDto postDto){
         this.postDao.updatePost(id, postDto);
