@@ -5,32 +5,32 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.*;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
     @CreatedDate
     @Column(updatable = false)
-    private Instant createAt;
+    private LocalDate createAt;
 
     @LastModifiedDate
     @Column(updatable = true)
-    private Instant updateAt;
+    private LocalDate updateAt;
 
-    public Instant getCreateAt() {
+    public LocalDate getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Instant createAt) {
-        this.createAt = createAt;
-    }
-
-    public Instant getUpdateAt() {
+    public LocalDate getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Instant updateAt) {
+    public void setCreateAt(LocalDate createAt) {
+        this.createAt = createAt;
+    }
+
+    public void setUpdateAt(LocalDate updateAt) {
         this.updateAt = updateAt;
     }
 }

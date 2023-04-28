@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "board_table")
-public class BoardEntity extends BaseEntity {
+public class BoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
