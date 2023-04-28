@@ -18,44 +18,46 @@ public class UserDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
     private final UserRepository userRepository;
 
-    public UserDao(@Autowired UserRepository userRepository){
+    public UserDao(@Autowired UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public void createUser(UserDto dto){
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(dto.getUsername());
+    public void createUser(UserDto dto) {
+        UserEntity userEntity = new UserEntity(
+                dto.getUserId(),
+                dto.getPassword()
+        );
         this.userRepository.save(userEntity);
     }
 
-    public UserEntity readUser(int id){
+
+    public void loginUser(UserDto dto) {
+        Optional<UserEntity> userEntity = this.userRepository.findByUserId(dto.getUserId());
+
+        if (userEntity.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        else if (!userEntity.get().getPassword().equals(dto.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    public UserEntity readUser(int id) {
         Optional<UserEntity> userEntity = this.userRepository.findById((long) id);
-        if (userEntity.isEmpty()){
+        if (userEntity.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return userEntity.get();
     }
 
-    public Iterator<UserEntity> readUserAll(){
+    public Iterator<UserEntity> readUserAll() {
         return this.userRepository.findAll().iterator();
     }
 
-    public void updateUser(int id, UserDto dto){
-        Optional<UserEntity> targetEntity = this.userRepository.findById((long) id);
-        if (targetEntity.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        UserEntity userEntity = targetEntity.get();
-        userEntity.setUsername(dto.getUsername() == null
-                ? userEntity.getUsername() : dto.getUsername());
-        this.userRepository.save(userEntity);
+    public void updateUser(int id, UserDto dto) {
     }
 
-    public void deleteUser(int id){
-        Optional<UserEntity> targetEntity = this.userRepository.findById((long) id);
-        if (targetEntity.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        this.userRepository.delete(targetEntity.get());
+    public void deleteUser(int id) {
+
     }
 }

@@ -10,6 +10,8 @@ public class UserEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String userId;
+    private String password;
     private String username;
 
     @OneToMany(
@@ -22,32 +24,55 @@ public class UserEntity extends BaseEntity{
     public UserEntity() {
     }
 
-    public UserEntity(Long id, String username, List<PostEntity> postEntityList) {
+    public UserEntity(Long id, String userId, String password, String username, List<PostEntity> postEntityList) {
         this.id = id;
+        this.userId = userId;
+        this.password = password;
         this.username = username;
         this.postEntityList = postEntityList;
     }
+    public UserEntity(String userId, String password) {
+        this.userId = userId;
+        this.password = password;
+    }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getUsername() { return username; }
+    public String getUserId() {
+        return userId;
+    }
 
-    public void setUsername(String username) { this.username = username; }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public List<PostEntity> getPostEntityList() {
         return postEntityList;
     }
-    public void setPostEntityList(List<PostEntity> postEntityList){
-        this.postEntityList = postEntityList;
-    }
 
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                '}';
+    public void setPostEntityList(List<PostEntity> postEntityList) {
+        this.postEntityList = postEntityList;
     }
 }

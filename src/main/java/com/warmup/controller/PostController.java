@@ -35,6 +35,7 @@ public class PostController {
 
     @GetMapping("")
     public List<PostDto> readPostAll(){
+        System.out.println("readPostAll");
         return this.postService.readPostAll();
     }
 

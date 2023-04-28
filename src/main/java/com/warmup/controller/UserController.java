@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,10 +21,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping()
+    @PostMapping("/join")
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody UserDto dto) {
         this.userService.createUser(dto);
+    }
+
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<String> loginUser(@RequestBody UserDto dto) {
+        this.userService.loginUser(dto);
+        return ResponseEntity.ok().body(userService.login(dto.getUserId(), dto.getPassword()));
     }
 
     @GetMapping("{id}")
