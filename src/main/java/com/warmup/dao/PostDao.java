@@ -1,7 +1,6 @@
 package com.warmup.dao;
 
 import com.warmup.dto.PostDto;
-import com.warmup.entity.BoardEntity;
 import com.warmup.entity.PostEntity;
 import com.warmup.repository.BoardRepository;
 import com.warmup.repository.PostRepository;
@@ -23,14 +22,14 @@ public class PostDao {
     private final BoardRepository boardRepository;
 
     public PostDao(
-            @Autowired PostRepository postRepository, BoardRepository boardRepository) {
+        @Autowired PostRepository postRepository, BoardRepository boardRepository) {
         this.postRepository = postRepository;
         this.boardRepository = boardRepository;
     }
 
     public void createPost(PostDto dto) {
         PostEntity postEntity = new PostEntity();
-        if(boardRepository.findById((long) dto.getBoardId()).isEmpty()){
+        if (boardRepository.findById((long) dto.getBoardId()).isEmpty()) {
             postEntity.setBoardEntity(null);
         } else {
             postEntity.setBoardEntity(boardRepository.findById((long) dto.getBoardId()).get());
@@ -66,11 +65,11 @@ public class PostDao {
         }
         PostEntity postEntity = targetEntity.get();
         postEntity.setTitle(
-                dto.getTitle() == null ? postEntity.getTitle() : dto.getTitle());
+            dto.getTitle() == null ? postEntity.getTitle() : dto.getTitle());
         postEntity.setContent(
-                dto.getContent() == null ? postEntity.getContent() : dto.getContent());
+            dto.getContent() == null ? postEntity.getContent() : dto.getContent());
         postEntity.setWriter(
-                dto.getWriter() == null ? postEntity.getWriter() : dto.getWriter());
+            dto.getWriter() == null ? postEntity.getWriter() : dto.getWriter());
         this.postRepository.save(postEntity);
     }
 

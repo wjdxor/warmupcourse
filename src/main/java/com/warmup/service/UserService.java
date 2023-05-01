@@ -31,7 +31,6 @@ public class UserService {
     private Long expiration = 1000 * 60 * 60L;
 
 
-
     public UserService(@Autowired UserDao userDao, UserRepository userRepository) {
         this.userDao = userDao;
         this.userRepository = userRepository;
@@ -46,8 +45,7 @@ public class UserService {
         Optional<UserEntity> userEntity = this.userRepository.findByUserId(dto.getUserId());
         if (userEntity.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        else if (!userEntity.get().getPassword().equals(dto.getPassword())) {
+        } else if (!userEntity.get().getPassword().equals(dto.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
@@ -60,9 +58,9 @@ public class UserService {
     public UserDto readUser(int id) {
         UserEntity userEntity = this.userDao.readUser(id);
         return new UserDto(
-                userEntity.getUserId(),
-                userEntity.getPassword(),
-                userEntity.getUsername()
+            userEntity.getUserId(),
+            userEntity.getPassword(),
+            userEntity.getUsername()
         );
 
     }
@@ -73,9 +71,9 @@ public class UserService {
         while (iterator.hasNext()) {
             UserEntity userEntity = iterator.next();
             userDtoList.add(new UserDto(
-                    userEntity.getUserId(),
-                    userEntity.getPassword(),
-                    userEntity.getUsername()
+                userEntity.getUserId(),
+                userEntity.getPassword(),
+                userEntity.getUsername()
             ));
         }
         return userDtoList;

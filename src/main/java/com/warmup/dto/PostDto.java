@@ -61,11 +61,11 @@ public class PostDto {
     @Override
     public String toString() {
         return "PostDto{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", writer='" + writer + '\'' +
-                ", boardId=" + boardId +
-                '}';
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", content='" + content + '\'' +
+            ", writer='" + writer + '\'' +
+            ", boardId=" + boardId +
+            '}';
     }
 }

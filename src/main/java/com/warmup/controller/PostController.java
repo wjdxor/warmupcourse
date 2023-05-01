@@ -7,7 +7,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,7 +26,7 @@ public class PostController {
     private final PostService postService;
 
     public PostController(
-            @Autowired PostService postService
+        @Autowired PostService postService
     ) {
         this.postService = postService;
     }
@@ -35,7 +43,7 @@ public class PostController {
     }
 
     @GetMapping("")
-    public List<PostDto> readPostAll(Authentication authentication){
+    public List<PostDto> readPostAll(Authentication authentication) {
         logger.info("authentication: {}", authentication);
         return this.postService.readPostAll();
     }
@@ -48,9 +56,9 @@ public class PostController {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updatePost(
-            @PathVariable("id") int id,
-            @RequestBody PostDto dto
-    ){
+        @PathVariable("id") int id,
+        @RequestBody PostDto dto
+    ) {
         this.postService.updatePost(id, dto);
     }
 

@@ -24,8 +24,8 @@ public class UserDao {
 
     public void createUser(UserDto dto) {
         UserEntity userEntity = new UserEntity(
-                dto.getUserId(),
-                dto.getPassword()
+            dto.getUserId(),
+            dto.getPassword()
         );
         this.userRepository.save(userEntity);
     }
@@ -36,8 +36,7 @@ public class UserDao {
 
         if (userEntity.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        else if (!userEntity.get().getPassword().equals(dto.getPassword())) {
+        } else if (!userEntity.get().getPassword().equals(dto.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }

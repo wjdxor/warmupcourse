@@ -4,7 +4,7 @@ public class UserDto {
     private String userId;
     private String password;
 
-    public UserDto( String userId, String password, String username) {
+    public UserDto(String userId, String password, String username) {
         this.userId = userId;
         this.password = password;
     }

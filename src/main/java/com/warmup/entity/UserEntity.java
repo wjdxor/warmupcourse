@@ -1,12 +1,19 @@
 package com.warmup.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "user_table")
-public class UserEntity extends BaseEntity{
+public class UserEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,9 +22,9 @@ public class UserEntity extends BaseEntity{
     private String username;
 
     @OneToMany(
-            targetEntity = PostEntity.class,
-            fetch = FetchType.LAZY,
-            mappedBy = "userEntity"
+        targetEntity = PostEntity.class,
+        fetch = FetchType.LAZY,
+        mappedBy = "userEntity"
     )
     private List<PostEntity> postEntityList = new ArrayList<>();
 
@@ -31,6 +38,7 @@ public class UserEntity extends BaseEntity{
         this.username = username;
         this.postEntityList = postEntityList;
     }
+
     public UserEntity(String userId, String password) {
         this.userId = userId;
         this.password = password;

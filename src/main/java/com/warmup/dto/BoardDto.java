@@ -31,8 +31,8 @@ public class BoardDto {
     @Override
     public String toString() {
         return "BoardDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+            "id=" + id +
+            ", name='" + name + '\'' +
+            '}';
     }
 }

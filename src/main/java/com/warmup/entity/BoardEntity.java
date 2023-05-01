@@ -1,6 +1,13 @@
 package com.warmup.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,35 +22,45 @@ public class BoardEntity {
     private String name;
 
     @OneToMany(
-            targetEntity = PostEntity.class,
-            fetch = FetchType.LAZY,
-            mappedBy = "boardEntity"
+        targetEntity = PostEntity.class,
+        fetch = FetchType.LAZY,
+        mappedBy = "boardEntity"
     )
     private List<PostEntity> postEntityList = new ArrayList<>();
 
-    public BoardEntity(){
+    public BoardEntity() {
     }
 
-    public BoardEntity(Long id, String name, List<PostEntity> postEntityList){
+    public BoardEntity(Long id, String name, List<PostEntity> postEntityList) {
         this.id = id;
         this.name = name;
         this.postEntityList = postEntityList;
     }
 
-    public BoardEntity(Long id, String name){
+    public BoardEntity(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public List<PostEntity> getPostEntityList() { return postEntityList; }
+    public List<PostEntity> getPostEntityList() {
+        return postEntityList;
+    }
 
     public void setPostEntityList(List<PostEntity> postEntityList) {
         this.postEntityList = postEntityList;
@@ -52,9 +69,9 @@ public class BoardEntity {
     @Override
     public String toString() {
         return "BoardEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", postEntityList=" + postEntityList +
-                '}';
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", postEntityList=" + postEntityList +
+            '}';
     }
 }

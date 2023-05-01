@@ -17,24 +17,24 @@ public class PostService {
     private static final Logger logger = LoggerFactory.getLogger(PostService.class);
     private final PostDao postDao;
 
-    public PostService(@Autowired PostDao postDao){
+    public PostService(@Autowired PostDao postDao) {
         this.postDao = postDao;
     }
 
-    public void createPost(PostDto postDto){
+    public void createPost(PostDto postDto) {
         this.postDao.createPost(postDto);
     }
 
-    public PostDto readPost(int id){
+    public PostDto readPost(int id) {
         PostEntity postEntity = this.postDao.readPost(id);
         PostDto postDto = createPostDto(postEntity);
         return postDto;
     }
 
-    public List<PostDto> readPostAll(){
+    public List<PostDto> readPostAll() {
         Iterator<PostEntity> iterator = this.postDao.readPostAll();
         List<PostDto> postDtoList = new ArrayList<>();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             PostEntity postEntity = iterator.next();
             postDtoList.add(createPostDto(postEntity));
         }
@@ -44,7 +44,7 @@ public class PostService {
     public List<PostDto> readPostByBoardId(int boardId) {
         Iterator<Object> iterator = this.postDao.readPostByBoardId(boardId);
         List<PostDto> postDtoList = new ArrayList<>();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             PostEntity postEntity = (PostEntity) iterator.next();
             postDtoList.add(createPostDto(postEntity));
         }
@@ -54,21 +54,21 @@ public class PostService {
 
     private PostDto createPostDto(PostEntity postEntity) {
         return new PostDto(
-                Math.toIntExact(postEntity.getId()),
-                postEntity.getTitle(),
-                postEntity.getContent(),
-                postEntity.getWriter(),
-                postEntity.getBoardEntity() == null
-                        ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
+            Math.toIntExact(postEntity.getId()),
+            postEntity.getTitle(),
+            postEntity.getContent(),
+            postEntity.getWriter(),
+            postEntity.getBoardEntity() == null
+                ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
         );
     }
 
 
-    public void updatePost(int id, PostDto postDto){
+    public void updatePost(int id, PostDto postDto) {
         this.postDao.updatePost(id, postDto);
     }
 
-    public void deletePost(int id){
+    public void deletePost(int id) {
         this.postDao.deletePost(id);
     }
 }

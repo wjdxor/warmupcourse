@@ -22,38 +22,38 @@ public class BoardDao {
         this.boardRepository = boardRepository;
     }
 
-    public void createBoard(BoardDto dto){
+    public void createBoard(BoardDto dto) {
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setName(dto.getName());
         this.boardRepository.save(boardEntity);
     }
 
-    public BoardEntity readBoard(int id){
+    public BoardEntity readBoard(int id) {
         Optional<BoardEntity> boardEntity = this.boardRepository.findById((long) id);
-        if (boardEntity.isEmpty()){
+        if (boardEntity.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return boardEntity.get();
     }
 
-    public Iterator<BoardEntity> readBoardAll(){
+    public Iterator<BoardEntity> readBoardAll() {
         return this.boardRepository.findAll().iterator();
     }
 
-    public void updateBoard(int id, BoardDto dto){
+    public void updateBoard(int id, BoardDto dto) {
         Optional<BoardEntity> targetEntity = this.boardRepository.findById((long) id);
-        if (targetEntity.isEmpty()){
+        if (targetEntity.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         BoardEntity boardEntity = targetEntity.get();
         boardEntity.setName(dto.getName() == null
-                ? boardEntity.getName() : dto.getName());
+            ? boardEntity.getName() : dto.getName());
         this.boardRepository.save(boardEntity);
     }
 
-    public void deleteBoard(int id){
+    public void deleteBoard(int id) {
         Optional<BoardEntity> targetEntity = this.boardRepository.findById((long) id);
-        if (targetEntity.isEmpty()){
+        if (targetEntity.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         this.boardRepository.delete(targetEntity.get());

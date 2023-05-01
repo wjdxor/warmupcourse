@@ -12,11 +12,11 @@ public class JwtUtil {
         claims.put("userId", userId);
 
         return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiredMs))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
-                .compact();
+            .setClaims(claims)
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + expiredMs))
+            .signWith(SignatureAlgorithm.HS256, secretKey)
+            .compact();
     }
 
     public static boolean isExpired(String token, String secretKey) {

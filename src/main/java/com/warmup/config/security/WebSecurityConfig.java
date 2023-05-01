@@ -23,21 +23,21 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-       return httpSecurity
-               .httpBasic().disable()
-               .csrf().disable()
-               .cors().and()
-               .authorizeHttpRequests(
-                       (requests) -> requests
-                               .requestMatchers("/user/join", "/user/login","/h2","/h2/**").permitAll()
-                               .anyRequest().authenticated()
-               )
-               .sessionManagement()
-               .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-               .and()
-               .addFilterBefore(new JwtFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class)
-               .logout().and()
-               .build();
+        return httpSecurity
+            .httpBasic().disable()
+            .csrf().disable()
+            .cors().and()
+            .authorizeHttpRequests(
+                (requests) -> requests
+                    .requestMatchers("/user/join", "/user/login", "/h2", "/h2/**").permitAll()
+                    .anyRequest().authenticated()
+            )
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .addFilterBefore(new JwtFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class)
+            .logout().and()
+            .build();
     }
 
 //    @Bean

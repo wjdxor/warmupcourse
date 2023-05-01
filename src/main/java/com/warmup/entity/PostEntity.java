@@ -1,7 +1,14 @@
 package com.warmup.entity;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "post_table")
@@ -14,8 +21,8 @@ public class PostEntity extends BaseEntity {
     private String writer;
 
     @ManyToOne(
-            targetEntity = BoardEntity.class,
-            fetch = FetchType.LAZY
+        targetEntity = BoardEntity.class,
+        fetch = FetchType.LAZY
     )
     @JoinColumn(name = "board_id")
     private BoardEntity boardEntity;
@@ -38,8 +45,8 @@ public class PostEntity extends BaseEntity {
     }
 
     @ManyToOne(
-            targetEntity = UserEntity.class,
-            fetch = FetchType.LAZY
+        targetEntity = UserEntity.class,
+        fetch = FetchType.LAZY
     )
     @JoinColumn(name = "writer_id")
     private UserEntity userEntity;
@@ -47,34 +54,54 @@ public class PostEntity extends BaseEntity {
     public PostEntity() {
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public void setTitle(String title) { this.title = title; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public String getContent() { return content; }
+    public String getContent() {
+        return content;
+    }
 
-    public void setContent(String content) { this.content = content; }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-    public String getWriter() { return writer; }
+    public String getWriter() {
+        return writer;
+    }
 
-    public void setWriter(String writer) { this.writer = writer; }
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
 
-    public BoardEntity getBoardEntity() { return boardEntity; }
+    public BoardEntity getBoardEntity() {
+        return boardEntity;
+    }
 
-    public void setBoardEntity(BoardEntity boardEntity) { this.boardEntity = boardEntity; }
+    public void setBoardEntity(BoardEntity boardEntity) {
+        this.boardEntity = boardEntity;
+    }
 
     @Override
     public String toString() {
         return "PostEntity{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", writer='" + writer + '\'' +
-                ", boardEntity=" + boardEntity +
-                '}';
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", content='" + content + '\'' +
+            ", writer='" + writer + '\'' +
+            ", boardEntity=" + boardEntity +
+            '}';
     }
 }
